@@ -19,6 +19,8 @@ import Mypackage.Input;
  * Deal with user menu-interface.
  *
  * Bugs: none known
+ * 
+ * @author Huang Chung Yu
  * @version      1.0
  * @see also     GradeSystem
  */
@@ -40,8 +42,10 @@ public class InOut {
 		/* Get all student data */
 		Info info = Input.read();
 		/* Get target student name by index targeting name */
-		System.out.println("Welcome~ "+ info.names[target]);
-		System.out.println(" 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n 3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) Leave Menu (enter: E)");
+		System.out.printf("Welcome~ "+ info.names[target]+"\n");
+		System.out.printf(" 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n");
 		/* Get user command */
 		Scanner id = new Scanner(System.in);
 		String command = id.nextLine();

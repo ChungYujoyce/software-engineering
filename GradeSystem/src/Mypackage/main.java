@@ -21,6 +21,11 @@ import Mypackage.UserMode;
  * Control the whole grading system interface
  *
  * Bugs: none known
+ * 
+ * @param none
+ * @return null
+ * 
+ * @author Huang Chung Yu
  * @version      2.0
  * @see also     GradeSystem
  */
@@ -61,9 +66,9 @@ public class main {
 			}else if(new String("E").equals(command)){
 				person = UserMode.user_mode();
 			}else {
-				System.out.println("Wrong command, please try again.");
+				System.out.printf("Wrong command, please try again.\n");
 			}
 		}
-		System.out.println("Thanks for using!");
+		System.out.printf("Thanks for using!\n");
 	}
 }
