@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Main Class File:  UserMode.java
+
 // Semester:         Spring 2020
 // Course:			 Software Engineering
 //
@@ -13,9 +14,18 @@ import java.io.*;
 import java.util.*;
 import java.util.Scanner;
 import Mypackage.Input;
-
+/**
+ * UserMode object.
+ * Represents a user interface for a grade system.
+ *
+ * Bugs: none known
+ * 
+ * @author Huang Chung Yu
+ * @version      2.0
+ * @see also     GradeSystem
+ */
 /** ------------------------------------------------------------------------------
- * Object Person:
+ * Class Person:
  * Initial properties of a searched person:
  * 
  * @param  user_in  user type in information, either a student ID or Q (leave the system)
@@ -30,14 +40,7 @@ class Person{
 		this.target = target;
 	}
 }
-/**
- * UserMode object.
- * Represents a user interface for a grade system.
- *
- * Bugs: none known
- * @version      2.0
- * @see also     GradeSystem
- */
+
 /** ------------------------------------------------------------------------------
  * Method user_mode
  * Require user to input ID or Q, and return the target object index(if exists) or only Q.
@@ -76,7 +79,7 @@ public class UserMode {
 				
 				if(target != -1) break;
 				else {
-					System.out.println("Sorry, your ID was wrong, please try again~");
+					System.out.printf("Sorry, your ID was wrong, please try again~\n");
 					ID = id.nextLine();
 				}
 			}
