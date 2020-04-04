@@ -10,12 +10,15 @@
 
 package Mypackage;
 import java.io.*;
+
 import java.util.*;
 import Mypackage.Input;
 import Mypackage.InOut;
 import Mypackage.ShowGrade;
 import Mypackage.UpdateWeights;
 import Mypackage.UserMode;
+import Mypackage.ShowAverage;
+import Mypackage.ShowRank;
 /**
  * Main object.
  * Control the whole grading system interface
