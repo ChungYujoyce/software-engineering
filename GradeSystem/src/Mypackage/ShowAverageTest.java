@@ -58,14 +58,5 @@ class ShowAverageTest {
 		System.setOut(null);
 	}
 	
-	@Test
-	void testintegration_1() {
-		
-	}
-	
-	@Test
-	void testintegration_2() {
-		
-	}
 }
 
