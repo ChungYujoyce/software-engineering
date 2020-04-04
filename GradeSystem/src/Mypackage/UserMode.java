@@ -63,11 +63,11 @@ public class UserMode {
 		Scanner id = new Scanner(System.in);
 		String ID = id.nextLine();
 		int target = -1;
-		if(new String("Q").equals(ID));
+		if(new String("Q").equals(ID)) {}
 		else {
 			Info info = Input.read(); // 962001051 §õ«Â§Ê 81 32 50 90 93 
 			/* Find the target object(student) */
-			while(target == -1) {
+			while(target == -1 && ! new String("Q").equals(ID)) {
 				for(int i=0; i<63; i++) {
 					if(Objects.equals(ID, String.valueOf(info.scores[i][0]))) {
 						target = i;
@@ -76,8 +76,7 @@ public class UserMode {
 				}
 				/* If user input non-existing ID: can't find the student(target), 
 				 * system will ask user to input ID again until find the target object. */
-				
-				if(target != -1) break;
+				if(target != -1) {break; }
 				else {
 					System.out.printf("Sorry, your ID was wrong, please try again~\n");
 					ID = id.nextLine();
