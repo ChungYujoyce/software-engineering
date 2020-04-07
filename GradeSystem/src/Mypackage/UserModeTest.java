@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 /**
  * Grades object testing.
  * Test i user input ID(correct/not correct) or Q(leave)
@@ -30,7 +31,7 @@ import java.io.PrintStream;
  */
 class UserModeTest {
 	static ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
+	static Scanner s;
 	@Test
 	/** ------------------------------------------------------------------------------
 	 * test testUser_mode()
@@ -49,12 +50,11 @@ class UserModeTest {
 		System.setIn(in);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));		
-		UserMode.user_mode();
+		s = new Scanner(System.in);
+		UserMode.user_mode(s);
 		
 		assertEquals("Enter ID or Q(finish usage)?\n", outContent.toString());
 		
-		System.setIn(System.in);
-		System.setOut(null);
 	}
 	
 	@Test
@@ -62,8 +62,9 @@ class UserModeTest {
 		ByteArrayInputStream in = new ByteArrayInputStream("962001051\n".getBytes());
 		System.setIn(in);
 		outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));		
-		UserMode.user_mode();
+		System.setOut(new PrintStream(outContent));	
+		s = new Scanner(System.in);
+		UserMode.user_mode(s);
 		
 		assertEquals("Enter ID or Q(finish usage)?\n", outContent.toString());
 		
@@ -75,8 +76,8 @@ class UserModeTest {
 		System.setIn(in);
 		outContent = new ByteArrayOutputStream(); 
 		System.setOut(new PrintStream(outContent));	
-		System.setIn(System.in); 
-		UserMode.user_mode(); 
+		s = new Scanner(System.in);
+		UserMode.user_mode(s); 
 		assertEquals("Enter ID or Q(finish usage)?\nSorry, your ID was wrong, please try again~\n", outContent.toString()); 
 	}
 

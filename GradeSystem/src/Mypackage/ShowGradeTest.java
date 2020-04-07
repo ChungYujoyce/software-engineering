@@ -23,34 +23,31 @@ class ShowGradeTest {
 
 	static ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	
-	
+	static int [][] scores = new int[63][7];
+	static String[] names = new String [63];
 	@Test
 	void testShowGrade_1() {
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-		int [][] scores = new int[63][7];
-		String[] names = new String [63];
-		names[0] = "½²©v½Ã";
-	    scores[0][0] = 985002509;
-		scores[0][2] = 84;
-		scores[0][3] = 92;
-		scores[0][4] = 98;
-		scores[0][5] = 94;
-		scores[0][6] = 99;
+		names[54] = "½²©v½Ã";
+	    scores[54][0] = 985002509;
+		scores[54][2] = 84;
+		scores[54][3] = 92;
+		scores[54][4] = 98;
+		scores[54][5] = 94;
+		scores[54][6] = 99;
 		ShowGrade.showGrade(names,scores,54);	
-		String expected = "½²©v½Ã Grades:\n\tlab1:\t\t84 \n\tlab2:\t\t92 \n\tlab3:\t\t98 \n\tmid-term:\t94 \n\tfinal exam:\t99 \n\ttotal grade:\t95 \n";
+		String expected = "½²©v½Ã Grades:\nlab1: 84\nlab2: 92\nlab3: 98\nmid-term: 94\nfinal-exam: 99\n";
 		String actuals =  outContent.toString();
 		
 		assertEquals(expected, actuals);
-		System.setOut(null);
+
 	}
 
 	@Test
 	void testShowGrade_2() {
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-		int [][] scores = new int[63][7];
-		String[] names = new String [63];
 		names[0] = "³\¤åÄÉ";
 	    scores[0][0] = 955002056;
 		scores[0][2] = 88;
@@ -59,10 +56,9 @@ class ShowGradeTest {
 		scores[0][5] = 98;
 		scores[0][6] = 91;
 		ShowGrade.showGrade(names,scores,0);		
-		String expected = "³\¤åÄÉ Grades:\n\tlab1:\t\t88 \n\tlab2:\t\t92 \n\tlab3:\t\t88 \n\tmid-term:\t98 \n\tfinal exam:\t91 \n\ttotal grade:\t93 \n";
+		String expected = "³\¤åÄÉ Grades:\nlab1: 88\nlab2: 92\nlab3: 88\nmid-term: 98\nfinal-exam: 91\n";
 		String actuals =  outContent.toString();
-		
 		assertEquals(expected, actuals);
-		System.setOut(null);
+
 	}
 }

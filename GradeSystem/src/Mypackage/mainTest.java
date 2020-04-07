@@ -12,14 +12,12 @@ package Mypackage;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
+
 
 /**
  * Integration testing.
@@ -56,7 +54,7 @@ public class mainTest {
 		main.main(new String[] {});
 		
 		assertEquals("Enter ID or Q(finish usage)?\nThanks for using!\n", outContent.toString());
-
+		
 	}
 	
 	@Test
@@ -81,15 +79,14 @@ public class mainTest {
 	 */
 	public void testUnexpectedScenario_1(){
 		
-		ByteArrayInputStream in = new ByteArrayInputStream("000000000\n".getBytes());
+		ByteArrayInputStream in = new ByteArrayInputStream("000000000\nQ\n".getBytes());
 		System.setIn(in);
-		ByteArrayInputStream inn = new ByteArrayInputStream("Q\n".getBytes());
-		System.setIn(inn);
-		outContent = new ByteArrayOutputStream(); 
-		System.setOut(new PrintStream(outContent));	
+		outContent = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent));
+		
 		main.main(new String[] {});
 		//UserMode.user_mode();
-		assertEquals("Enter ID or Q(finish usage)?\nSorry, your ID was wrong, please try again~\n", outContent.toString());
+		assertEquals("Enter ID or Q(finish usage)?\nSorry, your ID was wrong, please try again~\nThanks for using!\n", outContent.toString());
 		
 	}
 
@@ -127,22 +124,24 @@ public class mainTest {
 	 * 	(screen display) "Enter ID or Q(finish usage)?Welcome~ 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n此指令不存在!\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
 	 */
 	public void testUnexpectedScenario_2(){
-		ByteArrayInputStream in = new ByteArrayInputStream("955002056\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("X\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("E\n".getBytes()); 
-		System.setIn(in);
-		in = new ByteArrayInputStream("Q\n".getBytes()); 
+		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nX\nE\nQ\n".getBytes());
 		System.setIn(in);
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
 		main.main(new String[] {});
-		
-		assertEquals("Enter ID or Q(finish usage)?\nWelcome~ 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n此指令不存在!\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n", outContent.toString());
-		
-		System.setIn(System.in);
-		System.setOut(null);
+
+		assertEquals("Enter ID or Q(finish usage)?\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "Wrong command, please try again.\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "Enter ID or Q(finish usage)?\n"
+				+ "Thanks for using!\n", outContent.toString());
 	}
 
 
@@ -166,7 +165,7 @@ public class mainTest {
 	 * (screen)		Thanks for using!
 	 *  
 	 * input - 
-	 *  (user input) "955002056\nX\n"
+	 *  (user input) "955002056\n"
 	 * 	(user input) "E\n"
 	 *	(user input) "Q\n"
 	 * 
@@ -174,20 +173,20 @@ public class mainTest {
 	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
 	 */
 	public void testNormalScenario_1(){
-		ByteArrayInputStream in = new ByteArrayInputStream("955002056\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("E\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("Q\n".getBytes());
-		System.setIn(in);
+		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nE\nQ\n".getBytes());
+		System.setIn(in);System.setIn(in);
+		
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));		
 		main.main(new String[] {});
 		
-		assertEquals("輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n", outContent.toString());
-		
-		System.setIn(System.in);
-		System.setOut(null);
+		assertEquals("Enter ID or Q(finish usage)?\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "Enter ID or Q(finish usage)?\n"
+				+ "Thanks for using!\n", outContent.toString());
 	}
 	
 	
@@ -224,7 +223,7 @@ public class mainTest {
 	 * (screen)		Thanks for using!
 	  * 
 	 * input - 
-	 *  (user input) "955002056\nX\n"
+	 *  (user input) "955002056\n"
 	 *	(user input) "G\n"
 	 * 	(user input) "E\n"
 	 *	(user input) "Q\n"
@@ -233,22 +232,25 @@ public class mainTest {
 	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨成績:\n\tlab1:\t\t88\nlab2:\t\t92\nlab3:\t\t88\nmid-term:\t98\nfinal exam:\t91\ntotal grade:\t92\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n此指令不存在!\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
 	 */
 	public void testNormalScenario_2(){
-		ByteArrayInputStream in = new ByteArrayInputStream("955002056\n".getBytes());
+		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nG\nE\nQ\n".getBytes());
 		System.setIn(in);
-		in = new ByteArrayInputStream("G\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("E\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("Q\n".getBytes());
-		System.setIn(in);
+		
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));		
 		main.main(new String[] {});
 		
-		assertEquals("輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨成績:\n\tlab1:\t\t88 \n\tlab2:\t\t92 \n\tlab3:\t\t88 \n\tmid-term:\t98 \n\tfinal exam:\t91 \n\ttotal grade:\t93 \n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n", outContent.toString());
-
-		System.setIn(System.in);
-		System.setOut(null);
+		assertEquals("Enter ID or Q(finish usage)?\n"
+					+ "Welcome~ " +"許文馨\n"
+					+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+					+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+					+ "Leave Menu (enter: E)\n"
+					+ "許文馨 Grades:\nlab1: 88\nlab2: 92\nlab3: 88\nmid-term: 98\nfinal-exam: 91\n"
+					+ "Welcome~ 許文馨\n"
+					+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+					+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+					+ "Leave Menu (enter: E)\n"
+					+ "Enter ID or Q(finish usage)?\n"
+					+ "Thanks for using!\n", outContent.toString());
 	}
 	
 	
@@ -280,7 +282,7 @@ public class mainTest {
 	 * (screen)		Thanks for using!
 	 *  
 	 * input - 
-	 *  (user input) "955002056\nX\n"
+	 *  (user input) "955002056\n"
 	 *	(user input) "A\n"
 	 * 	(user input) "E\n"
 	 *	(user input) "Q\n"
@@ -289,22 +291,25 @@ public class mainTest {
 	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨平均91.40\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
 	 */
 	public void testNormalScenario_3(){
-		ByteArrayInputStream in = new ByteArrayInputStream("955002056\n".getBytes());
+		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nA\nE\nQ\n".getBytes());
 		System.setIn(in);
-		in = new ByteArrayInputStream("A\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("E\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("Q\n".getBytes());
-		System.setIn(in);
+		
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));		
 		main.main(new String[] {});
 		
-		assertEquals("輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨平均91.40\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n", outContent.toString());
-
-		System.setIn(System.in);
-		System.setOut(null);
+		assertEquals("Enter ID or Q(finish usage)?\n"
+				+ "Welcome~ " +"許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "Average of 許文馨 is: 92.6\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "Enter ID or Q(finish usage)?\n"
+				+ "Thanks for using!\n", outContent.toString());
 	}
 	
 	@Test
@@ -344,22 +349,25 @@ public class mainTest {
 	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨排名第14\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
 	 */
 	public void testNormalScenario_4(){
-		ByteArrayInputStream in = new ByteArrayInputStream("955002056\n".getBytes());
+		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nR\nE\nQ\n".getBytes());
 		System.setIn(in);
-		in = new ByteArrayInputStream("R\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("E\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("Q\n".getBytes());
-		System.setIn(in);
+		
 		outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));		
 		main.main(new String[] {});
 		
-		assertEquals("輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨排名第14\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n", outContent.toString());
-		
-		System.setIn(System.in);
-		System.setOut(null);
+		assertEquals("Enter ID or Q(finish usage)?\n"
+				+ "Welcome~ " +"許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "許文馨 Score: 92.6 Rank: 14\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "Enter ID or Q(finish usage)?\n"
+				+ "Thanks for using!\n", outContent.toString());
 	}
 	
 	@Test
@@ -408,7 +416,7 @@ public class mainTest {
 	 *  (user input) "955002056\n"
 	 *	(user input) "W\n"
 	 *	(user input) "20 20 20 20 20\n"
-	 * 	(user input) "Y"
+	 * 	(user input) "Y\n"
 	 * 	(user input) "E\n"
 	 *	(user input) "Q\n"
 	 * 
@@ -416,26 +424,28 @@ public class mainTest {
 	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n舊配分\n\tlab1\t10%\n\tlab2\t10%\n\tlab3\t10%\n\tmid-term\t30%\n\tfinal exam\t40%\n輸入新配分(%)\n\tlab1\t\tlab2\t\tlab3\t\tmid-term\t\tfinal exam\t請確認新配分\n\tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal exam\t20%\n以上正確嗎? Y (Yes) 或 N (No):輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
 	 */
 	public void testNormalScenario_5(){
-		ByteArrayInputStream in = new ByteArrayInputStream("955002056\n".getBytes());
+		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nW\n20 20 20 20 20\nY\nE\nQ\n".getBytes());
 		System.setIn(in);
-		in = new ByteArrayInputStream("W\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("20 20 20 20 20\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("Y\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("E\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("Q\n".getBytes());
-		System.setIn(in);
-		outContent = new ByteArrayOutputStream();
+		
+		ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));		
 		main.main(new String[] {});
 		
-		assertEquals("輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n舊配分\n\tlab1\t10%\n\tlab2\t10%\n\tlab3\t10%\n\tmid-term\t30%\n\tfinal exam\t40%\n輸入新配分(%)\n\tlab1\t\tlab2\t\tlab3\t\tmid-term\t\tfinal exam\t請確認新配分\n\tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal exam\t20%\n以上正確嗎? Y (Yes) 或 N (No):輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n", outContent.toString());
+		assertEquals("Enter ID or Q(finish usage)?\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "\tlab1\t10%\n\tlab2\t10%\n\tlab3\t10%\n\tmid-term\t30%\n\tfinal-exam\t40%\n"
+				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal exam\t20%\n"
+				+ "Are they correct? Y (Yes) or N (No)\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "Enter ID or Q(finish usage)?\n"
+				+ "Thanks for using!\n", outContent.toString());
 		
-		System.setIn(System.in);
-		System.setOut(null);
 	}
 	
 	@Test
@@ -483,7 +493,7 @@ public class mainTest {
 	 *  (user input) "955002056\n"
 	 *	(user input) "W\n"
 	 *	(user input) "20 20 20 20 20\n"
-	 * 	(user input) "N"
+	 * 	(user input) "N\n"
 	 * 	(user input) "E\n"
 	 *	(user input) "Q\n"
 	 * 
@@ -492,26 +502,31 @@ public class mainTest {
 	 * " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n 3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) Leave Menu (enter: E)\n"
 	 */
 	public void testNormalScenario_6(){
-		ByteArrayInputStream in = new ByteArrayInputStream("955002056\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("W\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("20 20 20 20 20\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("N\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("E\n".getBytes());
-		System.setIn(in);
-		in = new ByteArrayInputStream("Q\n".getBytes());
+		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nW\n20 20 20 20 20\nN\n20 20 10 25 25\nY\nE\nQ\n".getBytes());
 		System.setIn(in);
 		
-		outContent = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));		
+		ByteArrayOutputStream outContent1 = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(outContent1));		
 		main.main(new String[] {});
 		
-		assertEquals("Enter ID or Q(finish usage)?\nWelcome~ 許文馨\n\t1) G Show Grade (enter: G)\n\t2) R Show Rank (enter: R)\n\t"
-				+ "3) A Show Average (enter: A)\n\t4) Update Weights (enter: W)\n\t5) Leave Menu (enter: E)\n\tlab1\t10%\n\tlab2\t10%\n\tlab3\t10%\n\tmid-term\t30%\n\tfinal-exam\t40%\n\tlab1\t\tlab2\t\tlab3\t\tmid-term\t\tfinal exam\t請確認新配分\n\tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal exam\t20%\n以上正確嗎? Y (Yes) 或 N (No):輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n", outContent.toString());
+		assertEquals("Enter ID or Q(finish usage)?\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "\tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal-exam\t20%\n"
+				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal exam\t20%\n"
+				+ "Are they correct? Y (Yes) or N (No)\n"
+				+ "Please set the weights again...\n"
+				+ "\tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal-exam\t20%\n"
+				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t10%\n\tmid-term\t25%\n\tfinal exam\t25%\n"
+				+ "Are they correct? Y (Yes) or N (No)\n"
+				+ "Welcome~ 許文馨\n"
+				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+				+ "Leave Menu (enter: E)\n"
+				+ "Enter ID or Q(finish usage)?\n"
+				+ "Thanks for using!\n", outContent1.toString());
 		
-		System.setIn(System.in);
 	}
 }
