@@ -10,9 +10,10 @@
 
 package Mypackage;
 import java.io.*;
+
 import java.util.*;
-import java.util.Scanner;
 import Mypackage.Input;
+
 
 /**
  * InOut object.
@@ -38,18 +39,19 @@ import Mypackage.Input;
  ------------------------------------------------------------------------------*/
 
 public class InOut {
-	public static String choose(int target) {
+	public static String choose(int target, Scanner s) {
 		/* Get all student data */
 		Info info = Input.read();
+		String command = "";
 		/* Get target student name by index targeting name */
-		System.out.printf("Welcome~ "+ info.names[target]+"\n");
-		System.out.printf(" 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
-				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
-				+ "Leave Menu (enter: E)\n");
-		/* Get user command */
-		Scanner id = new Scanner(System.in);
-		String command = id.nextLine();
-	
+		if(target != 1) {
+			System.out.printf("Welcome~ "+ info.names[target]+"\n");
+			System.out.printf(" 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+					+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+					+ "Leave Menu (enter: E)\n");
+			/* Get user command */
+			command = s.nextLine();
+		}
 		return command;
 	}
 }
