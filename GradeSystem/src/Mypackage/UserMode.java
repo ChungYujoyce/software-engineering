@@ -12,8 +12,7 @@
 package Mypackage;
 import java.io.*;
 import java.util.*;
-import java.util.Scanner;
-import Mypackage.Input;
+
 /**
  * UserMode object.
  * Represents a user interface for a grade system.
@@ -48,7 +47,7 @@ class Person{
  * @return	Object Person(ID, target)
  * 
  * Time estimate: O(n)
- * Example: Person person = UserMode.user_mode(); 
+ * Example: Person person = UserMode.user_mode(s); 
  * 
  * If user input existing ID: return (ID, target ID index)
  * 			 non-existing ID: e.g. E/123 
@@ -58,10 +57,9 @@ class Person{
  ------------------------------------------------------------------------------*/
 
 public class UserMode {
-	public static Person user_mode() {
+	public static Person user_mode(Scanner s) {
 		System.out.printf("Enter ID or Q(finish usage)?\n");
-		Scanner id = new Scanner(System.in);
-		String ID = id.nextLine();
+		String ID = s.nextLine();
 		int target = -1;
 		if(new String("Q").equals(ID)) {}
 		else {
@@ -79,7 +77,7 @@ public class UserMode {
 				if(target != -1) {break; }
 				else {
 					System.out.printf("Sorry, your ID was wrong, please try again~\n");
-					ID = id.nextLine();
+					ID = s.nextLine();
 				}
 			}
 		}  

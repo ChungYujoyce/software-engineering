@@ -51,23 +51,25 @@ import Mypackage.ShowRank;
  ------------------------------------------------------------------------------*/
 
 public class main {
+	public static Scanner s;
 	static int[] weights = new int[] {10, 10, 10, 30, 40};
 	public static void main(String[] args) {
+		s = new Scanner(System.in);
 		Info info = Input.read();
-		Person person = UserMode.user_mode();
+		Person person = UserMode.user_mode(s);
 		while(!new String("Q").equals(person.user_in)){
 			
-			String command = InOut.choose(person.target);
+			String command = InOut.choose(person.target, s);
 			if(new String("G").equals(command)) {
 				ShowGrade.showGrade(info.names, info.scores, person.target);
 			}else if(new String("W").equals(command)){
-				weights = UpdateWeights.weights(weights);
+				weights = UpdateWeights.weights(weights, s);
 			}else if(new String("A").equals(command)){
 				ShowAverage.average(person.target, weights);
 			}else if(new String("R").equals(command)){
 				ShowRank.showrank(person.target, weights);
 			}else if(new String("E").equals(command)){
-				person = UserMode.user_mode();
+				person = UserMode.user_mode(s);
 			}else {
 				System.out.printf("Wrong command, please try again.\n");
 			}
