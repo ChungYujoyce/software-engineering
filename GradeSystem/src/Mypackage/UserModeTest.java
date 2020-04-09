@@ -34,7 +34,7 @@ class UserModeTest {
 	static Scanner s;
 	@Test
 	/** ------------------------------------------------------------------------------
-	 * test testUser_mode()
+	 * test testUser_mode_1()
 	 * This test is for UserMode class 
 	 * 
 	 * (screen)		Enter ID of Q(finish usage)?
@@ -56,7 +56,18 @@ class UserModeTest {
 		assertEquals("Enter ID or Q(finish usage)?\n", outContent.toString());
 		
 	}
-	
+	/** ------------------------------------------------------------------------------
+	 * test testUser_mode_2()
+	 * This test is for UserMode class 
+	 * 
+	 * (screen)		Enter ID of Q(finish usage)?
+	 * (user input)	962001051					[existing ID]
+	 * (screen)		none switch to other Class
+	 * 
+	 * input - (user input) "962001051\n"
+	 * 
+	 * expected - (screen display) "Enter ID or Q(finish usage)?\n"
+	 */
 	@Test
 	void testUser_mode_2() {
 		ByteArrayInputStream in = new ByteArrayInputStream("962001051\n".getBytes());
@@ -69,7 +80,22 @@ class UserModeTest {
 		assertEquals("Enter ID or Q(finish usage)?\n", outContent.toString());
 		
 	}
-	
+	/** ------------------------------------------------------------------------------
+	 * test testUser_mode_3()
+	 * This test is for UserMode class 
+	 * 
+	 * (screen)		Enter ID of Q(finish usage)?
+	 * (user input)	12333						[non-existing ID]
+	 * (screen)		Sorry, your ID was wrong, please try again~
+	 * (user input) 962001051					[existing ID]
+	 * (screen)		none switch to other Class
+	 * 
+	 * 
+	 * input - (user input) "12333\n"
+	 * 						"962001051\n"
+	 * 
+	 * expected - (screen display) "Enter ID or Q(finish usage)?\nSorry, your ID was wrong, please try again~\n"
+	 */
 	@Test
 	void testUser_mode_3() {
 		ByteArrayInputStream in = new ByteArrayInputStream("12333\n962001051\n".getBytes());

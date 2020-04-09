@@ -21,13 +21,31 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-
+/**
+ * 
+ * Test the show rank function.
+ * 
+ * Bugs: none known
+ * 
+ * @author       Huang Chung Yu
+ * @version      1.0
+ */
 class ShowRankTest {
 
 	static Student[] Students = new Student[63];
-	
 	static ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	
+	/** ------------------------------------------------------------------------------
+	 * test testShowrank_1()
+	 * This test is test the show rank function
+	 * 
+	 * Use user input weights to calculate correct student's rank.
+	 * 
+	 * input weights - {20,10,10,30,30}
+	 * 
+	 * expected result - 楊永成 Score: 87.6 Rank: 44
+	 * 
+	 * */
 	@Test
 	void testShowrank_1() {
 		int []weights = {20,10,10,30,30};
@@ -38,7 +56,17 @@ class ShowRankTest {
 		assertEquals("楊永成 Score: 87.6 Rank: 44\n", outContent.toString());
 		
 	}
-	
+	/** ------------------------------------------------------------------------------
+	 * test testShowrank_2()
+	 * This test is test the show rank function
+	 * 
+	 * Use user input weights to calculate correct student's rank.
+	 * 
+	 * input weights - {10,10,10,30,40}
+	 * 
+	 * expected result - 容家駒 Score: 90.9 Rank: 23\n
+	 * 
+	 * */
 	@Test
 	void testShowrank_2() {
 		int []weights = {10,10,10,30,40};
@@ -48,7 +76,16 @@ class ShowRankTest {
 		assertEquals("容家駒 Score: 90.9 Rank: 23\n", outContent.toString());
 		
 	}
-	
+	/** ------------------------------------------------------------------------------
+	 * test testSort_1()
+	 * This test is test the sorting function
+	 * 
+	 * input unsorted int list - {87,32,79,55,56,45,22,100,93,88,87,37,67}
+	 * expected sorted in list - {22,32,37,45,55,56,67,79,87,87,88,93,100}
+	 * 
+	 * assertTrue(Arrays.equals(expect, get));
+	 * 
+	 * */
 	@Test
 	void testSort_1() {
 		
@@ -67,7 +104,16 @@ class ShowRankTest {
 		assertTrue(Arrays.equals(expect, get));
 		
 	}
-	
+	/** ------------------------------------------------------------------------------
+	 * test testSort_2()
+	 * This test is test the sorting function
+	 * 
+	 * input unsorted int list - {100,93,88,87,37,67,87,32,79,55,56,45,22}
+	 * expected sorted in list - {22,32,37,45,55,56,67,79,87,87,88,93,100}
+	 * 
+	 * assertTrue(Arrays.equals(expect, get));
+	 * 
+	 * */
 	@Test
 	void testSort_2() {
 		float []num = {100,93,88,87,37,67,87,32,79,55,56,45,22};

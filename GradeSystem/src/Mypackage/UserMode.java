@@ -43,7 +43,8 @@ class Person{
 /** ------------------------------------------------------------------------------
  * Method user_mode
  * Require user to input ID or Q, and return the target object index(if exists) or only Q.
- 
+ * 
+ * @param Scanner s
  * @return	Object Person(ID, target)
  * 
  * Time estimate: O(n)

@@ -102,6 +102,7 @@ public class UpdateWeights {
 		/* Update successfully */
 		return new_weights;
 	}	
+	/* Count if the sum of user input weights is equal to 100*/
 	static int count_100(Scanner s, int count, int[]weights, int []new_weights) {
 		System.out.printf("\tlab1\t%d%%\n\tlab2\t%d%%\n\tlab3\t%d%%\n\tmid-term\t%d%%\n\tfinal-exam\t%d%%\n",weights[0],weights[1],weights[2],weights[3],weights[4]);
 		String w = s.nextLine();

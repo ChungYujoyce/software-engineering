@@ -26,7 +26,7 @@ import java.io.PrintStream;
  * Bugs: none known
  * 
  * @author       Huang Chung Yu
- * @version      1.0
+ * @version      3.0
  */
 public class mainTest {
 	private static ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -121,7 +121,18 @@ public class mainTest {
 	 *  (user input) "955002056\nX\nE\nQ\n"
 	 * 
 	 * expected -
-	 * 	(screen display) "Enter ID or Q(finish usage)?Welcome~ 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n此指令不存在!\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
+	 * 	(screen display) "Enter ID or Q(finish usage)?\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *					 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *					 "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				 	 "Leave Menu (enter: E)\n"
+	 *				 	 "Wrong command, please try again.\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *				 	 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *			         "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				     "Leave Menu (enter: E)\n"
+	 *				     "Enter ID or Q(finish usage)?\n"
+	 *				     "Thanks for using!\n"
 	 */
 	public void testUnexpectedScenario_2(){
 		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nX\nE\nQ\n".getBytes());
@@ -170,8 +181,15 @@ public class mainTest {
 	 *	(user input) "Q\n"
 	 * 
 	 * expected -
-	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
-	 */
+	 * 	(screen display) "Enter ID or Q(finish usage)?\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *					 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *					 "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				 	 "Leave Menu (enter: E)\n"
+	 *				 	 "Enter ID or Q(finish usage)?\n"
+	 *					 "Thanks for using!\n"
+	 * 
+	 * */
 	public void testNormalScenario_1(){
 		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nE\nQ\n".getBytes());
 		System.setIn(in);System.setIn(in);
@@ -229,8 +247,21 @@ public class mainTest {
 	 *	(user input) "Q\n"
 	 * 
 	 * expected -
-	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨成績:\n\tlab1:\t\t88\nlab2:\t\t92\nlab3:\t\t88\nmid-term:\t98\nfinal exam:\t91\ntotal grade:\t92\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n此指令不存在!\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
-	 */
+	 * 	(screen display) "Enter ID or Q(finish usage)?\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *					 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *					 "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				 	 "Leave Menu (enter: E)\n"
+	 *				 	 "許文馨 Grades:\nlab1: 88\nlab2: 92\nlab3: 88\nmid-term: 98\nfinal-exam: 91\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *				 	 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *			         "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				     "Leave Menu (enter: E)\n"
+	 *				     "Enter ID or Q(finish usage)?\n"
+	 *				     "Thanks for using!\n"
+	 * 
+	 * 
+	 * */
 	public void testNormalScenario_2(){
 		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nG\nE\nQ\n".getBytes());
 		System.setIn(in);
@@ -288,8 +319,20 @@ public class mainTest {
 	 *	(user input) "Q\n"
 	 * 
 	 * expected -
-	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨平均91.40\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
-	 */
+	 * 	(screen display) "Enter ID or Q(finish usage)?\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *					 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *					 "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				 	 "Leave Menu (enter: E)\n"
+	 *				 	 "Average of 許文馨 is: 92.6\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *				 	 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *			         "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				     "Leave Menu (enter: E)\n"
+	 *				     "Enter ID or Q(finish usage)?\n"
+	 *				     "Thanks for using!\n"
+	 *
+	 **/
 	public void testNormalScenario_3(){
 		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nA\nE\nQ\n".getBytes());
 		System.setIn(in);
@@ -346,8 +389,20 @@ public class mainTest {
 	 *	(user input) "Q\n"
 	 * 
 	 * expected -
-	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n許文馨排名第14\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
-	 */
+	 * 	(screen display) "Enter ID or Q(finish usage)?\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *					 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *					 "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				 	 "Leave Menu (enter: E)\n"
+	 *				 	 "許文馨 Score: 92.6 Rank: 14\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *				 	 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *			         "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				     "Leave Menu (enter: E)\n"
+	 *				     "Enter ID or Q(finish usage)?\n"
+	 *				     "Thanks for using!\n"
+	 *
+	 **/
 	public void testNormalScenario_4(){
 		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nR\nE\nQ\n".getBytes());
 		System.setIn(in);
@@ -421,8 +476,31 @@ public class mainTest {
 	 *	(user input) "Q\n"
 	 * 
 	 * expected -
-	 * 	(screen display) "輸入ID或 Q (結束使用)?Welcome 許文馨\n輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n舊配分\n\tlab1\t10%\n\tlab2\t10%\n\tlab3\t10%\n\tmid-term\t30%\n\tfinal exam\t40%\n輸入新配分(%)\n\tlab1\t\tlab2\t\tlab3\t\tmid-term\t\tfinal exam\t請確認新配分\n\tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal exam\t20%\n以上正確嗎? Y (Yes) 或 N (No):輸入指令\n\t1) G 顯示成績 (Grade)\n\t2) R 顯示排名 (Rank)\n\t3) A 顯示平均 (Average)\n\t4) W 更新配分 (Weight)\n\t5) E 離開選單 (Exit)\n輸入ID或 Q (結束使用)?結束使用，系統關閉。\n"
-	 */
+	 * 	(screen display) "Enter ID or Q(finish usage)?\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *					 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *					 "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				 	 "Leave Menu (enter: E)\n"
+	 *				 	 "lab1	10%
+	 *					  lab2	10%
+	 *					  lab3	10%
+	 *					  mid-term	    30%
+	 *					  final-exam	40%"
+	 *					 "new weights:
+	 *					  lab1	20%
+	 *					  lab2	20%
+	 *					  lab3	20%
+	 *					  mid-term	    20%
+	 *					  final-exam	20%"
+	 *					 "Are they correct? Y (Yes) or N (No)\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *				 	 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *			         "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				     "Leave Menu (enter: E)\n"
+	 *				     "Enter ID or Q(finish usage)?\n"
+	 *				     "Thanks for using!\n"
+	 *
+	 **/
 	public void testNormalScenario_5(){
 		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nW\n20 20 20 20 20\nY\nE\nQ\n".getBytes());
 		System.setIn(in);
@@ -437,7 +515,7 @@ public class mainTest {
 				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
 				+ "Leave Menu (enter: E)\n"
 				+ "\tlab1\t10%\n\tlab2\t10%\n\tlab3\t10%\n\tmid-term\t30%\n\tfinal-exam\t40%\n"
-				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal exam\t20%\n"
+				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal-exam\t20%\n"
 				+ "Are they correct? Y (Yes) or N (No)\n"
 				+ "Welcome~ 許文馨\n"
 				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
@@ -498,9 +576,33 @@ public class mainTest {
 	 *	(user input) "Q\n"
 	 * 
 	 * expected -
-	 * 	(screen display) "Enter ID or Q(finish usage)?\nWelcome~ 許文馨\n
-	 * " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n 3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) Leave Menu (enter: E)\n"
-	 */
+	 * 	(screen display) "Enter ID or Q(finish usage)?\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *					 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *					 "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				 	 "Leave Menu (enter: E)\n"
+	 *				 	 "lab1	10%
+	 *					  lab2	10%
+	 *					  lab3	10%
+	 *					  mid-term	    30%
+	 *					  final-exam	40%"
+	 *					 "Are they correct? Y (Yes) or N (No)\n"
+	 *					 "Please set the weights again...\n"
+	 *					 "new weights:
+	 *					  lab1	20%
+	 *					  lab2	20%
+	 *					  lab3	20%
+	 *					  mid-term	    20%
+	 *					  final-exam	20%"
+	 *					 "Are they correct? Y (Yes) or N (No)\n"
+	 *					 "Welcome~ 許文馨\n"
+	 *				 	 " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "
+	 *			         "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
+	 *				     "Leave Menu (enter: E)\n"
+	 *				     "Enter ID or Q(finish usage)?\n"
+	 *				     "Thanks for using!\n"
+	 *
+	 **/
 	public void testNormalScenario_6(){
 		ByteArrayInputStream in = new ByteArrayInputStream("955002056\nW\n20 20 20 20 20\nN\n20 20 10 25 25\nY\nE\nQ\n".getBytes());
 		System.setIn(in);
@@ -515,11 +617,11 @@ public class mainTest {
 				+ "3) Show Average (enter: A)\n 4) Update Weights (enter: W)\n 5) "
 				+ "Leave Menu (enter: E)\n"
 				+ "\tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal-exam\t20%\n"
-				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal exam\t20%\n"
+				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal-exam\t20%\n"
 				+ "Are they correct? Y (Yes) or N (No)\n"
 				+ "Please set the weights again...\n"
 				+ "\tlab1\t20%\n\tlab2\t20%\n\tlab3\t20%\n\tmid-term\t20%\n\tfinal-exam\t20%\n"
-				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t10%\n\tmid-term\t25%\n\tfinal exam\t25%\n"
+				+ "\tNew weights:\n \tlab1\t20%\n\tlab2\t20%\n\tlab3\t10%\n\tmid-term\t25%\n\tfinal-exam\t25%\n"
 				+ "Are they correct? Y (Yes) or N (No)\n"
 				+ "Welcome~ 許文馨\n"
 				+ " 1) Show Grade (enter: G) \n 2) Show Rank (enter: R)\n "

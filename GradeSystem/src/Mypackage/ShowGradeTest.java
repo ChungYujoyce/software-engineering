@@ -18,6 +18,15 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+/**
+ * 
+ * Test the show grade function.
+ * 
+ * Bugs: none known
+ * 
+ * @author       Huang Chung Yu
+ * @version      1.0
+ */
 
 class ShowGradeTest {
 
@@ -25,6 +34,17 @@ class ShowGradeTest {
 	
 	static int [][] scores = new int[63][7];
 	static String[] names = new String [63];
+	/** ------------------------------------------------------------------------------
+	 * test testShowGrade_1()
+	 * This test is test the show grade function
+	 * 
+	 * input name - "½²©v½Ã"
+	 * 		(lab1, lab2, lab3, mid-term, final-exam) 
+	 * input scores - 84 92 98 94 99
+	 * 
+	 * expected result - ½²©v½Ã Grades:\nlab1: 84\nlab2: 92\nlab3: 98\nmid-term: 94\nfinal-exam: 99\n
+	 * 
+	 * */
 	@Test
 	void testShowGrade_1() {
 		outContent = new ByteArrayOutputStream();
@@ -44,6 +64,17 @@ class ShowGradeTest {
 
 	}
 
+	/** ------------------------------------------------------------------------------
+	 * test testShowGrade_2()
+	 * This test is test the show grade function
+	 *
+	 * input name - "³\¤åÄÉ"
+	 * 		(lab1, lab2, lab3, mid-term, final-exam) 
+	 * input scores - 88 92 88 98 91
+	 * 
+	 * expected result - ³\¤åÄÉ Grades:\nlab1: 88\nlab2: 92\nlab3: 88\nmid-term: 98\nfinal-exam: 91\n
+	 * 
+	 * */
 	@Test
 	void testShowGrade_2() {
 		outContent = new ByteArrayOutputStream();

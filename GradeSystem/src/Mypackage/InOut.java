@@ -31,6 +31,7 @@ import Mypackage.Input;
  * Call this method after user input correct ID, show the user menu,
  * get another user input of command.
  * 
+ * @param Scanner s
  * @param 		int target      An index which the system already searched for later usage.
  * @return		string command
  * 

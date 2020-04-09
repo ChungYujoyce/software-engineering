@@ -18,11 +18,36 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+/**
+ * 
+ * Test the show average function.
+ * 
+ * Bugs: none known
+ * 
+ * @author       Huang Chung Yu
+ * @version      1.0
+ */
 class ShowAverageTest {
 
 	static ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
+	/** ------------------------------------------------------------------------------
+	 * test testAverage_1()
+	 * This test is test the calculation of score average
+	 * 
+	 * 
+	 * input name - "½²©v½Ã"
+	 * 		(lab1, lab2, lab3, mid-term, final-exam) 
+	 * input scores - 84 92 98 94 99
+	 * 
+	 * expected name - "½²©v½Ã"
+	 * 		(lab1, lab2, lab3, mid-term, final-exam) 
+	 * expected scores - 84 92 98 94 99
+	 * 
+	 * input name should equals name
+	 * input scores should equals scores
+	 * 
+	 * */
 	
 	@Test
 	void testAverage_1() {
@@ -46,6 +71,22 @@ class ShowAverageTest {
 		System.setOut(null);
 	}
 
+	/** ------------------------------------------------------------------------------
+	 * test testAverage_2()
+	 * This test is test the calculation of score average
+	 * 
+	 * input name - "³\¤åÄÉ"
+	 * 		(lab1, lab2, lab3, mid-term, final-exam) 
+	 * input scores - 88 92 88 98 91
+	 * 
+	 * expected name - "³\¤åÄÉ"
+	 * 		(lab1, lab2, lab3, mid-term, final-exam) 
+	 * expected scores - 88 92 88 98 91
+	 * 
+	 * input name should equals name
+	 * input scores should equals scores
+	 * 
+	 * */
 	@Test
 	void testAverage_2() {
 		outContent = new ByteArrayOutputStream();
